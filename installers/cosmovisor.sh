@@ -53,7 +53,7 @@ install() {
 }
 uninstall() {
 	echo -e "${C_LGn}Cosmovisor uninstalling...${RES}"
-	rm -rf `which cosmovisor`
+	rm -rf $HOME/cosmos-sdk/ `which cosmovisor`
 }
 
 # Actions
