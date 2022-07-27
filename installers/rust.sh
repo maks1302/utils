@@ -50,7 +50,10 @@ install() {
 	sudo apt install curl build-essential pkg-config libssl-dev libudev-dev clang make -y
 	curl --proto '=https' -sSf https://sh.rustup.rs | sh -s -- -y
 	echo -e "${C_R}^ X Don't do that X ^${RES}\n"
-	. $HOME/.cargo/env
+	sed -i '0,/cargo\/env/{/cargo\/env/d;}' $HOME/.bash_profile
+	local former_path="$PATH"
+	sed -i '0,/ PATH=/{/ PATH=/d;}' $HOME/.bash_profile
+	. <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/miscellaneous/insert_variable.sh) -n PATH -v "$HOME/.cargo/bin:$former_path"
 	if [ "$nightly" = "true" ]; then
 		rustup toolchain install nightly
 		rustup default nightly
@@ -59,6 +62,9 @@ install() {
 uninstall() {
 	echo -e "${C_LGn}Rust uninstalling...${RES}"
 	rustup self uninstall -y
+	local new_path=`sed -e "s%$HOME/.cargo/bin:%%" <<< "$PATH"`
+	sed -i '0,/ PATH=/{/ PATH=/d;}' $HOME/.bash_profile
+	. <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/miscellaneous/insert_variable.sh) -n PATH -v "$new_path"	
 }
 
 # Actions
