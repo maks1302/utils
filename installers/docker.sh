@@ -46,6 +46,7 @@ done
 
 # Functions
 install() {
+	touch $HOME/.bash_profile
 	cd
 	if ! docker --version; then
 		echo -e "${C_LGn}Docker installation...${RES}"
