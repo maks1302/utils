@@ -48,6 +48,7 @@ install() {
 	sudo apt update
 	sudo apt upgrade -y
 	sudo apt install curl build-essential pkg-config libssl-dev libudev-dev clang make -y
+	touch $HOME/.bash_profile
 	curl --proto '=https' -sSf https://sh.rustup.rs | sh -s -- -y
 	echo -e "${C_R}^ X Don't do that X ^${RES}\n"
 	sed -i '0,/cargo\/env/{/cargo\/env/d;}' $HOME/.bash_profile
