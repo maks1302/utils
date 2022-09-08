@@ -55,7 +55,8 @@ install() {
 		./configure --enable-optimizations
 		make
 		sudo make altinstall
-		sudo apt install python3-pip -y 
+		sudo apt install python3-pip -y
+		pip3 install aiogram
 		cd
 	fi
 }
